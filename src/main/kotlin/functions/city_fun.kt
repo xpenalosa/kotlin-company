@@ -1,5 +1,6 @@
 package functions
 
 import dataclasses.City
+import kotlin.math.abs
 
-fun City.getDistanceTo(other: City): Double = if (this == other) 0.0 else 1.0
+fun City.getDistanceTo(other: City): Int = abs(longitude - other.longitude) + abs(latitude - other.latitude)
