@@ -40,8 +40,8 @@ fun Order.shipTo(city: City): Order {
 fun Order.dispatch(): Order {
     status = Order.OrderStatus.SHIPPED
     GlobalScope.launch {
-        // Order is delivered after 2 minutes
-        delay(2 * 60 * 1000L)
+        // Order is delivered after N minutes, depending on the distance between both cities
+        delay(sourceCity.getDeliveryDelayTo(destCity) * 60 * 1000L)
         status = Order.OrderStatus.DELIVERED
     }
     return this

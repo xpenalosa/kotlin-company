@@ -1,7 +1,11 @@
 package dataclasses
 
+import java.util.concurrent.atomic.AtomicLong
+
 data class Company(val name: String) {
+    var shopId: AtomicLong = AtomicLong(0)
     val shops = ArrayList<Shop>()
+    val cities = HashSet<City>()
 }
 
 data class City(val name: String, val latitude: Int, val longitude: Int)
