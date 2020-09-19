@@ -32,4 +32,10 @@ internal class CustomerFactoryTest {
         Assertions.assertSame(city, customer.city)
     }
 
+    @Test
+    fun `Customer by id should return the created object`() {
+        val customer = CustomerFactory.instantiate("Customer", city)
+
+        Assertions.assertSame(customer, CustomerFactory.getObjectWithId(customer.id))
+    }
 }

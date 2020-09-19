@@ -13,10 +13,8 @@ internal class ShopFactoryTest {
     private var productSet = HashSet<Product>()
 
     init {
-        val prod1 = Product("Prod1", 1.0, 1.0)
-        val prod2 = Product("Prod2", 1.0, 2.0)
-        productSet.add(prod1)
-        productSet.add(prod2)
+        productSet.add(Product("Prod1", 1.0, 1.0))
+        productSet.add(Product("Prod2", 1.0, 2.0))
     }
 
     @Test
@@ -31,10 +29,24 @@ internal class ShopFactoryTest {
     fun `Shop city should be set correctly`() {
         val shop = ShopFactory.instantiate(city, productSet)
 
+        Assertions.assertSame(city, shop.city)
+    }
+
+    @Test
+    fun `Shop supported products should be initiated correctly`() {
+        val shop = ShopFactory.instantiate(city, productSet)
+
         Assertions.assertAll(
             Executable { Assertions.assertNotNull(shop.supportedProducts) },
             Executable { Assertions.assertTrue(productSet.first() in shop.supportedProducts) },
             Executable { Assertions.assertSame(productSet, shop.supportedProducts) }
         )
+    }
+
+    @Test
+    fun `Shop by id should return the created object`() {
+        val shop = ShopFactory.instantiate(city, productSet)
+
+        Assertions.assertSame(shop, ShopFactory.getObjectWithId(shop.id))
     }
 }

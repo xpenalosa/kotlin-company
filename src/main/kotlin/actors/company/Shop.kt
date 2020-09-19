@@ -1,12 +1,13 @@
 package actors.company
 
 import actors.City
-import actors.product.Inventory
 import actors.product.Product
+import factories.company.OrderFactory
+import utility.CountingMap
 import java.io.File
 
 data class Shop(val id: Long, val city: City, val supportedProducts: Set<Product>) {
-    val inventory = Inventory()
+    val inventory = CountingMap<Product>()
 
     init {
         supportedProducts.forEach { inventory[it] = 0 }
@@ -17,10 +18,23 @@ data class Shop(val id: Long, val city: City, val supportedProducts: Set<Product
             val (product_name, amount) = line.split(",")
             val product = supportedProducts.find { it.name == product_name }
             if (product != null) {
-                inventory.addProduct(product, amount.toInt())
+                inventory.addCount(product, amount.toInt())
             }
         }
     }
 
+    fun createNewOrder(customerCity: City): Order = OrderFactory.instantiate(city, customerCity)
+    fun getAvailableProducts(): CountingMap<Product> = inventory.filter { it.value > 0 } as CountingMap<Product>
+    fun addToOrder(order: Order, product: Product, amount: Int): Boolean {
+        if (inventory.getOrDefault(product, Int.MIN_VALUE) >= amount) {
+            order.addProduct(product, amount)
+            return true
+        }
+        return false
+    }
+
+    fun removeFromOrder(order: Order, product: Product, amount: Int) {
+        order.subtractProduct(product, amount)
+    }
 
 }

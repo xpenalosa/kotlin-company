@@ -6,10 +6,14 @@ import factories.BaseFactory
 
 object CustomerFactory : BaseFactory() {
 
-    override fun instantiate(vararg args: Any): Customer = Customer(
-        id = nextId.getAndAdd(1),
-        name = args[0] as String,
-        city = args[1] as City
-    )
+    override fun instantiate(vararg args: Any): Customer {
+        val customer = Customer(
+            id = nextId.getAndAdd(1),
+            name = args[0] as String,
+            city = args[1] as City
+        )
+        createdObjects[customer.id] = customer
+        return customer
+    }
 
 }

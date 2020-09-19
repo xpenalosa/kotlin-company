@@ -2,9 +2,9 @@ package actors.company
 
 import actors.City
 import actors.customer.Customer
-import actors.product.Inventory
 import actors.product.Product
 import factories.company.ShopFactory
+import utility.CountingMap
 
 data class Company(val name: String) {
 
@@ -26,12 +26,12 @@ data class Company(val name: String) {
         return shop
     }
 
-    fun shopsInCity(city: City): List<Shop>? = cityToShopMap()[city]
-    private fun cityToShopMap(): Map<City, List<Shop>> = shops.groupBy(Shop::city)
+    fun getShopsInCity(city: City): List<Shop>? = getCityToShopMap()[city]
+    private fun getCityToShopMap(): Map<City, List<Shop>> = shops.groupBy(Shop::city)
 
     fun getTotalStock(): List<Pair<Product, Int>> {
-        val totalStock = Inventory()
-        shops.forEach { totalStock.bulkAddProduct(it.inventory) }
+        val totalStock = CountingMap<Product>()
+        shops.forEach { totalStock.addCount(it.inventory) }
         return totalStock.toList()
     }
 }

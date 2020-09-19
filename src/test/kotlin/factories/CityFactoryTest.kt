@@ -36,4 +36,11 @@ internal class CityFactoryTest {
 
         Assertions.assertSame(cityLon, city.longitude)
     }
+
+    @Test
+    fun `City by id should return the created object`() {
+        val city = CityFactory.instantiate("City", 0, 0)
+
+        Assertions.assertSame(city, CityFactory.getObjectWithId(city.id))
+    }
 }
