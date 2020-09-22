@@ -1,3 +1,10 @@
-fun main(args: Array<String>) {
-    TODO("Entry point still not implemented")
+import console.Console
+
+fun main() {
+    registerCommands()
+    Console().launch()
+}
+
+fun registerCommands(){
+
 }
