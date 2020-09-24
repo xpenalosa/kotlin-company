@@ -27,7 +27,7 @@ internal class CountingMapTest {
 
     @Test
     fun `initializeCount _other_ should add an entry for each item in the collection`() {
-        val keys: List<String> = listOf<String>("KeyA", "KeyB", "KeyC")
+        val keys: List<String> = listOf("KeyA", "KeyB", "KeyC")
         countingMap.initializeCount(keys)
 
         keys.forEach{

@@ -6,7 +6,7 @@ import kotlin.math.abs
 data class City(val id: Long, val name: String, val latitude: Int, val longitude: Int) {
 
     companion object {
-        var delayPerDistanceUnit: Duration = Duration.ofSeconds(1)
+        private var delayPerDistanceUnit: Duration = Duration.ofSeconds(1)
 
         private fun getDeliveryForDistance(distance: Int): Int = (delayPerDistanceUnit.toMillis() * distance).toInt()
     }

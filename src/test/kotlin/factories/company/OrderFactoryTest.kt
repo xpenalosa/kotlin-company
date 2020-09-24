@@ -1,11 +1,9 @@
 package factories.company
 
 import actors.City
-import actors.product.Product
 import factories.CityFactory
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.function.Executable
 
 internal class OrderFactoryTest {
 
