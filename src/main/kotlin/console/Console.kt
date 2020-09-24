@@ -7,6 +7,7 @@ class Console {
 
     companion object {
         var availableCommands: HashMap<String, CommandBase> = HashMap()
+        var context: HashMap<String, Any> = HashMap()
 
         fun addCommand(cmd: CommandBase) = availableCommands.putIfAbsent(cmd.commandIdentifier, cmd)
     }
