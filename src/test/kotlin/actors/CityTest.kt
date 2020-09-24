@@ -35,7 +35,7 @@ internal class CityTest {
 
         Assertions.assertAll(
             Executable { Assertions.assertTrue(city1.getDeliveryDelayTo(city2) < city1.getDeliveryDelayTo(city3)) },
-            Executable { Assertions.assertSame(city1.getDeliveryDelayTo(city2), city2.getDeliveryDelayTo(city1)) },
+            Executable { Assertions.assertEquals(city1.getDeliveryDelayTo(city2), city2.getDeliveryDelayTo(city1)) },
         )
 
     }
